@@ -1,17 +1,12 @@
-"use client"
+"use client";
 
-// import Navbar from '../components/Navbar';
-// import Footer from '../components/Footer';
-// import BookingForm from '/components/BookingForm';
-// import CalendarView from '../components/CalendarView';
-import { useState } from 'react';
-import BookingForm from '../components/booking-form';
+import { useState } from "react";
+import BookingForm from "../components/booking-form";
 import OtherHero from "../components/other-hero";
-
 
 export default function Booking() {
   const [bookingSuccess, setBookingSuccess] = useState(false);
-  const [qrCode, setQrCode] = useState('');
+  const [qrCode, setQrCode] = useState("");
 
   const handleBookingSuccess = (data) => {
     setBookingSuccess(true);
@@ -22,31 +17,24 @@ export default function Booking() {
     <div>
       <OtherHero name={"Booking"} />
       <main>
-       
         {!bookingSuccess ? (
           <>
-            <div onDateChange={(date) => console.log(date)} />
-            <BookingForm
-            onBookingSuccess={handleBookingSuccess} />
+            <BookingForm onBookingSuccess={handleBookingSuccess} />
           </>
         ) : (
-          <div>
-            <h2>Booking Confirmed!</h2>
-            <img src={qrCode} alt="Booking QR Code" />
+          <div className="text-center p-6">
+            <h2 className="text-2xl font-bold text-green-600 mb-4">
+              Booking Confirmed!
+            </h2>
+            <p className="mb-4">Please show this QR code at the entrance:</p>
+            {qrCode ? (
+              <img src={qrCode} alt="Booking QR Code" className="mx-auto w-40 h-40" />
+            ) : (
+              <img src="/images/QR_Code.jpg" alt="Booking QR Code" className="mx-auto w-40 h-40" />
+            )}
           </div>
         )}
       </main>
     </div>
   );
 }
-
-
-
-// export default function About() {
-//   return (
-//     <>
-//     <OtherHero name={"About"} />
-//     <HomeAbout />
-// </>
-//   );
-// }

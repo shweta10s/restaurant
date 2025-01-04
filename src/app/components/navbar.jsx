@@ -7,6 +7,7 @@ import React from 'react'
 // import PhoneNavbarDrawer from './phoneNavbarDrawer';
 import { useDispatch } from 'react-redux';
 import { openModal } from '../redux/slice/popupSlice';
+import PhoneMenu from './phoneMenu';
 // import Image from 'next/image';
 
 const Navbar = () => {
@@ -52,7 +53,7 @@ const Navbar = () => {
       aria-expanded="false"
     >
       <span className="sr-only">Open main menu</span>
-      {/* <PhoneNavbarDrawer /> */}
+     <PhoneMenu />
     </div>
     <div className="w-full max-md:hidden md:block md:w-auto" id="navbar-default">
       <ul className="font-[600] md:text-[18px] flex gap-10 p-4 md:p-0 mt-4 md:flex-row md:mt-0 text-[#fff] ">

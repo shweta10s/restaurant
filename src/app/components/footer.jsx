@@ -28,10 +28,10 @@ import { RiMailFill } from "react-icons/ri";
 const Footer = () => {
     return (
         <div>
-            <footer className='footer md:mt-[50px] w-full h-full max-md:mt-[30px] max-md:py-4'>
+            <footer className='footer md:mt-[50px] w-full h-full max-md:mt-[10px] max-md:py-4'>
             <div className='max-w-6xl h-[1px] bg-[#FFF] mx-auto'></div>
 
-                <div className='max-w-6xl md:px-4 max-md:px-6 flex mx-auto md:mt-8'>
+                <div className='max-w-6xl md:px-4 max-md:px-6 flex mx-auto md:mt-8 max-md:mt-4'>
                     <div className="w-full h-full flex max-md:flex-col justify-between items-start md:mb-[30px] max-md:gap-[8px]">
                         <div className="col-1 md:w-[50%] flex flex-col md:gap-[10px] max-md:gap-[10px] items-start">
                             <div className="h-full flex">

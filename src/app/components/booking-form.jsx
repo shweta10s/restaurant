@@ -1,64 +1,149 @@
-"use client"
+"use client";
 
-import React from 'react'
-
-import { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function BookingForm({ onBookingSuccess }) {
   const [formData, setFormData] = useState({
-    date: '',
-    time: '',
-    guests: '',
-    name: '',
-    contact: '',
+    date: "",
+    time: "",
+    guests: "",
+    name: "",
+    contact: "",
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/book', formData);
+      // const response = await axios.post("/api/book", formData);
+      const response = await axios.post('http://localhost:5000/api/bookings', formData);
+
+      toast.success("Booking Confirmed!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
       onBookingSuccess(response.data);
     } catch (error) {
-      console.error('Booking failed', error);
+      toast.error("Booking Failed. Please try again.", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      console.error("Booking failed", error);
     }
   };
 
   return (
-    <div className='md:mt-6'>
-<div className="md:mt-10 max-md:mt-5 flex flex-col justify-center items-center">
-            <p className="font-[500] md:text-[24px] max-md:text-[18px] text-center">Table Reservation</p>
-            <p className="md:text-[32px] max-md:text-[24px] text-center font-[500] tracking-tight text-[#f5880c]">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            </p>
-        </div>
-<div className='max-w-6xl mx-auto bg-[#fff] md:h-[60vh] flex md:mt-4'>
-      
-<div className='w-[40%] flex justify-center items-center'>
-  <img className='h-[90%]' src="/images/table.jpg" alt="" />
-</div>
-       <form onSubmit={handleSubmit} className=' md:w-[60%] md:mt-4 max-md:mt-2 flex flex-col justify-center items-center gap-4 md:pr-4'> 
-       <input
-         className='md:w-full border border-[#858587] bg-transparent rounded-[4px] md:px-[16px] max-md:px-[8px] md:py-[10px] max-md:py-[6px] font-[400] md:text-[16px] max-md:text-[14px] text-[#000] outline-none'  type="text" value={formData.name} placeholder="Full Name" onChange={(e) => setFormData({ ...formData, name: e.target.value })} required />
-      <div className='flex justify-between gap-4 md:w-full'>
-      <input 
-         className='md:w-[50%] border border-[#858587] bg-transparent rounded-[4px] md:px-[16px] max-md:px-[8px] md:py-[10px] max-md:py-[6px] font-[400] md:text-[16px] max-md:text-[14px] text-[#000] outline-none' 
-        type="date" value={formData.date} onChange={(e) => setFormData({ ...formData, date: e.target.value })} required />
-        <input
-         className='md:w-[50%] border border-[#858587] bg-transparent rounded-[4px] md:px-[16px] max-md:px-[8px] md:py-[10px] max-md:py-[6px] font-[400] md:text-[16px] max-md:text-[14px] text-[#000] outline-none'  type="time" value={formData.time} onChange={(e) => setFormData({ ...formData, time: e.target.value })} required />
+    <div className="pt-8">
+      {/* Toaster Container */}
+      <ToastContainer />
+
+      {/* Header Section */}
+      <div className="text-center mb-8">
+        <p className="font-[500] md:text-[24px] max-md:text-[18px] text-center">
+          Table Reservation
+        </p>
+        <p className="md:text-[32px] max-md:text-[24px] text-center font-[500] tracking-tight text-[#f5880c]">
+          Lorem ipsum dolor sit amet.
+        </p>
       </div>
-        <input
-         className='md:w-full border border-[#858587] bg-transparent rounded-[4px] md:px-[16px] max-md:px-[8px] md:py-[10px] max-md:py-[6px] font-[400] md:text-[16px] max-md:text-[14px] text-[#000] outline-none' 
-         type="number" value={formData.guests} placeholder="Number of Guests" onChange={(e) => setFormData({ ...formData, guests: e.target.value })} required />
-         
-         <input
-         className='md:w-full border border-[#858587] bg-transparent rounded-[4px] md:px-[16px] max-md:px-[8px] md:py-[10px] max-md:py-[6px] font-[400] md:text-[16px] max-md:text-[14px] text-[#000] outline-none'
-          type="text" value={formData.contact} placeholder="Phone Number" onChange={(e) => setFormData({ ...formData, contact: e.target.value })} required />
-         <button className='border-[#f5880c] md:py-[14px] max-md:py-[12px] md:px-[28px] max-md:px-[14px] w-full bg-[#f5880c] border-2 hover:bg-[#FFF] hover:text-[#f5880c] text-[#FFF] md:text-[16px] max-md:text-[14px] rounded-full md:mt-[20px] flex justify-center items-center gap-2' type="submit">Book Now</button>
-      </form>
-    </div>
+
+      {/* Form Container */}
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center shadow-lg rounded-lg overflow-hidden">
+        {/* Image Section */}
+        <div className="w-full md:w-[40%] h-[200px] md:h-auto flex items-center justify-center">
+          <img
+            className="h-full w-full max-md:w-[90%] max-md:mx-auto object-cover"
+            src="/images/table.jpg"
+            alt="Table Reservation"
+          />
+        </div>
+
+        {/* Form Section */}
+        <form
+          onSubmit={handleSubmit}
+          className="w-full md:w-[60%] p-6 md:p-10 flex flex-col gap-4"
+        >
+          {/* Full Name */}
+          <input
+            className="w-full border border-gray-300 rounded-md px-4 py-3 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-[#f5880c] text-[#000]"
+            type="text"
+            value={formData.name}
+            placeholder="Full Name"
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            required
+          />
+
+          {/* Date & Time */}
+          <div className="flex flex-col md:flex-row gap-4">
+            <input
+              className="w-full md:w-[50%] border border-gray-300 rounded-md px-4 py-3 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-[#f5880c] text-[#000]"
+              type="date"
+              value={formData.date}
+               placeholder="DD-MM-YYYY"
+              onChange={(e) =>
+                setFormData({ ...formData, date: e.target.value })
+              }
+              required
+            />
+            <input
+              className="w-full md:w-[50%] border border-gray-300 rounded-md px-4 py-3 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-[#f5880c] text-[#000]"
+              type="time"
+              value={formData.time}
+               placeholder="00:00"
+              onChange={(e) =>
+                setFormData({ ...formData, time: e.target.value })
+              }
+              required
+            />
+          </div>
+
+          {/* Number of Guests */}
+          <input
+            className="w-full border border-gray-300 rounded-md px-4 py-3 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-[#f5880c] text-[#000] "
+            type="number"
+            value={formData.guests}
+            placeholder="Number of Guests"
+            onChange={(e) =>
+              setFormData({ ...formData, guests: e.target.value })
+            }
+            required
+          />
+
+          {/* Phone Number */}
+          <input
+            className="w-full border border-gray-300 rounded-md px-4 py-3 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-[#f5880c] text-[#000]"
+            type="text"
+            value={formData.contact}
+            placeholder="Phone Number"
+            onChange={(e) =>
+              setFormData({ ...formData, contact: e.target.value })
+            }
+            required
+          />
+
+          {/* Submit Button */}
+          <button
+            className="w-full bg-[#f5880c] text-white font-semibold py-3 rounded-full hover:bg-white hover:text-[#f5880c] border-2 border-[#f5880c] transition-all"
+            type="submit"
+          >
+            Book Now
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
-
-

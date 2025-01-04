@@ -8,8 +8,8 @@ const HomeAbout = () => {
         <div className="max-w-6xl mx-auto md:px-4 md:mt-[50px] max-md:mt-[30px] max-md:px-4">
         <div className="md:mt-10 max-md:mt-5 flex flex-col justify-center items-center">
             <p className="font-[500] md:text-[24px] max-md:text-[18px] text-center">About</p>
-            <p className="md:text-[32px] max-md:text-[24px] text-center font-[500] tracking-tight text-[#f5880c]">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            <p className="md:text-[32px] max-md:text-[24px] text-center font-[500] tracking-tight text-[#f5880c]"> 
+            Lorem ipsum dolor sit amet.
             </p>
         </div>
     </div>
